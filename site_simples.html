@@ -1,0 +1,252 @@
+<!--
+Arquivo: site_simples.html
+Descrição: Página única responsiva com cabeçalho, navegação, lista de artigos, página de artigo única, modo claro/escuro, formulário de contato (mailto) e instruções de deploy.
+Como usar:
+1) Salve este arquivo como `index.html`.
+2) Abra localmente (duplo-clique) para testar.
+3) Para publicar: crie um repositório no GitHub e ative GitHub Pages (branch `main` ou `gh-pages`) ou faça deploy no Netlify/Vercel arrastando o arquivo.
+-->
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>Meu Site — Exemplo</title>
+  <meta name="description" content="Site de exemplo responsivo com modo escuro, artigos e formulário de contato." />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <style>
+    :root{
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #0b1220;
+      --muted: #5b6470;
+      --accent: #0066ff;
+      --radius: 12px;
+    }
+    [data-theme="dark"]{
+      --bg: #071022;
+      --card: #071a2a;
+      --text: #e6eef8;
+      --muted: #9fb4d1;
+      --accent: #66b0ff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg), #e9eff8 200%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:24px;
+    }
+    .container{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7ad1ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    nav a{margin-left:16px;text-decoration:none;color:var(--muted)}
+    .hero{display:grid;grid-template-columns:1fr;gap:18px;background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 6px 30px rgba(10,15,30,0.06)}
+    .title{font-size:1.6rem;font-weight:700;margin:0}
+    .lead{color:var(--muted);margin:6px 0 0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(10,15,30,0.04)}
+    .card h3{margin:0 0 8px}
+    .meta{font-size:0.9rem;color:var(--muted)}
+    .footer{margin-top:36px;padding-top:18px;border-top:1px solid rgba(0,0,0,0.06);color:var(--muted)}
+    .controls{display:flex;gap:12px;align-items:center}
+    button{cursor:pointer;border:0;background:var(--accent);color:white;padding:8px 12px;border-radius:8px}
+    .ghost{background:transparent;color:var(--text);border:1px solid rgba(0,0,0,0.06);padding:8px 12px}
+    /* Responsive */
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:600px){.grid{grid-template-columns:1fr}.brand .text{display:none}}
+    /* Article view */
+    .article{background:var(--card);padding:20px;border-radius:12px}
+    .article img{max-width:100%;border-radius:8px;margin:12px 0}
+    /* small utilities */
+    .muted{color:var(--muted)}
+    .stack{display:flex;gap:12px;flex-wrap:wrap}
+    input[type="search"], input[type="email"], textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background:none;color:var(--text)}
+    label{font-weight:600;font-size:0.9rem}
+  </style>
+</head>
+<body data-theme="light">
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">JM</div>
+        <div>
+          <div style="font-weight:700">Meu Site</div>
+          <div class="muted" style="font-size:0.9rem">Exemplo de site estático</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <input id="search" type="search" placeholder="Buscar artigos..." aria-label="Buscar" />
+        <nav role="navigation" aria-label="menu">
+          <a href="#home">Início</a>
+          <a href="#articles">Artigos</a>
+          <a href="#contact">Contato</a>
+        </nav>
+        <button id="toggleTheme" title="Alternar modo">Modo</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div>
+          <h1 class="title">Bem-vindo ao meu site</h1>
+          <p class="lead">Um modelo simples, rápido e acessível para publicar conteúdo. Pronto para ser enviado ao GitHub Pages, Netlify ou Vercel.</p>
+          <div style="margin-top:12px" class="stack">
+            <a class="ghost" href="#articles">Ver artigos</a>
+            <a class="ghost" href="#contact">Fale comigo</a>
+          </div>
+        </div>
+        <div style="min-height:80px;display:flex;align-items:center;justify-content:center">
+          <img src="https://picsum.photos/seed/picsum/600/350" alt="Imagem de destaque" style="width:100%;height:auto;border-radius:8px;object-fit:cover" />
+        </div>
+      </section>
+
+      <section id="articles" style="margin-top:20px">
+        <h2 style="margin:0 0 10px">Artigos recentes</h2>
+        <div class="grid" id="cards">
+          <!-- Cards gerados por JS -->
+        </div>
+      </section>
+
+      <section id="article-view" style="display:none;margin-top:18px">
+        <a href="#articles" class="muted">← Voltar</a>
+        <article class="article" id="full-article">
+          <!-- Conteúdo do artigo carregado via JS -->
+        </article>
+      </section>
+
+      <section id="contact" style="margin-top:28px">
+        <h2>Contato</h2>
+        <p class="muted">Prefere enviar um e-mail diretamente? <a href="mailto:seuemail@exemplo.com">seuemail@exemplo.com</a></p>
+        <form id="contactForm" style="max-width:640px;margin-top:12px">
+          <label for="email">Seu e‑mail</label>
+          <input id="email" type="email" placeholder="seu@exemplo.com" required />
+          <label for="message" style="margin-top:8px">Mensagem</label>
+          <textarea id="message" rows="5" placeholder="Escreva sua mensagem" required></textarea>
+          <div style="margin-top:10px"><button type="submit">Enviar (mailto)</button></div>
+        </form>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>© <span id="year"></span> Meu Site — Feito com ❤️</div>
+        <div class="muted">Pronto para publicar em GitHub Pages, Netlify ou Vercel</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Dados de exemplo dos artigos
+    const articles = [
+      {
+        id: 'a1',
+        title: 'Como começar a vender online: 7 passos práticos',
+        date: '2025-09-01',
+        excerpt: 'Guia objetivo para abrir sua loja e começar a vender com baixo investimento.',
+        image: 'https://picsum.photos/seed/1/800/400',
+        content: '<p>Vender online começa com produto, público e teste. Primeiro, valide uma ideia com anúncios de baixo custo...</p>'
+      },
+      {
+        id: 'a2',
+        title: 'Design simples que converte: checklist',
+        date: '2025-07-18',
+        excerpt: 'Pequenas mudanças no visual que aumentam confiança e conversão no site.',
+        image: 'https://picsum.photos/seed/2/800/400',
+        content: '<p>Use hierarquia visual, botões claros, provas sociais e foco no CTA. Otimize para mobile primeiro...</p>'
+      },
+      {
+        id: 'a3',
+        title: 'Publicar no GitHub Pages em 5 minutos',
+        date: '2025-05-11',
+        excerpt: 'Passo a passo para transformar um arquivo HTML em site público gratuitamente.',
+        image: 'https://picsum.photos/seed/3/800/400',
+        content: '<p>Crie repositório, suba index.html e ative GitHub Pages nas configurações do repositório. Ajuste se necessário...</p>'
+      }
+    ];
+
+    const cardsEl = document.getElementById('cards');
+    const articleView = document.getElementById('article-view');
+    const fullArticle = document.getElementById('full-article');
+    const search = document.getElementById('search');
+
+    function renderCards(filter=''){
+      cardsEl.innerHTML = '';
+      const filtered = articles.filter(a => (a.title + a.excerpt).toLowerCase().includes(filter.toLowerCase()));
+      if(filtered.length === 0){cardsEl.innerHTML = '<div class="card">Nenhum artigo encontrado.</div>';return}
+      for(const a of filtered){
+        const div = document.createElement('div');div.className='card';
+        div.innerHTML = `
+          <img src="${a.image}" alt="${a.title}" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px" />
+          <h3>${a.title}</h3>
+          <div class="meta">${a.date} • <span class="muted">Leia em 3 min</span></div>
+          <p class="muted">${a.excerpt}</p>
+          <div style="margin-top:10px"><a href="#" data-id="${a.id}" class="ghost">Ler</a></div>
+        `;
+        cardsEl.appendChild(div);
+      }
+    }
+
+    // carrega artigo completo
+    document.addEventListener('click', (e)=>{
+      const a = e.target.closest('a[data-id]');
+      if(a){e.preventDefault();const id = a.dataset.id;openArticle(id)}
+    });
+
+    function openArticle(id){
+      const art = articles.find(x=>x.id===id);
+      if(!art) return;
+      fullArticle.innerHTML = `
+        <h2>${art.title}</h2>
+        <div class="meta">${art.date}</div>
+        <img src="${art.image}" alt="${art.title}" />
+        ${art.content}
+        <p><strong>Gostou?</strong> Compartilhe ou envie uma mensagem pelo contato.</p>
+      `;
+      articleView.style.display='block';
+      window.scrollTo({top:articleView.offsetTop - 20, behavior:'smooth'});
+    }
+
+    // tema
+    const toggle = document.getElementById('toggleTheme');
+    toggle.addEventListener('click', ()=>{
+      const body = document.body;
+      const current = body.getAttribute('data-theme');
+      body.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+      localStorage.setItem('site-theme', body.getAttribute('data-theme'));
+    });
+    // preservar tema
+    const saved = localStorage.getItem('site-theme');
+    if(saved) document.body.setAttribute('data-theme', saved);
+
+    // busca
+    search.addEventListener('input', (e)=>renderCards(e.target.value));
+
+    // form: abrir mailto
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const email = document.getElementById('email').value || 'seuemail@exemplo.com';
+      const message = encodeURIComponent(document.getElementById('message').value || 'Olá');
+      const subject = encodeURIComponent('Contato pelo site');
+      window.location.href = `mailto:${email}?subject=${subject}&body=${message}`;
+    });
+
+    // data dinâmica
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // render inicial
+    renderCards();
+  </script>
+</body>
+</html>
